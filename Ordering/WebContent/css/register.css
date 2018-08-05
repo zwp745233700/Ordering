@@ -1,0 +1,55 @@
+.main{
+	margin:0 auto;
+	background:url(../images/login.jpg) no-repeat;
+	background-size:cover
+}
+.title{
+	margin-left:200px;
+	margin-top:40px;
+	color:gray;
+	font-size:40px;
+}
+.login1{
+	margin-left:350px;
+	margin-top:85px;
+	padding-left:8px;
+	border:1px solid gray;
+	width:310px;
+}
+.login2{
+	line-height:40px;
+	margin-left:20px;
+	padding-left:15px;
+}
+
+.login3{
+	margin-left:350px;
+	margin-top:30px;
+	padding-left:8px;
+	border:1px solid gray;
+	width:310px;
+}
+.login4{
+	line-height:40px;
+	margin-left:20px;
+	padding-left:15px;
+	width:330px;
+}
+.login6{
+	margin-left:350px;
+	margin-top:85px;
+	padding-left:8px;
+	border:1px solid gray;
+	width:350px;
+}
+.submit1{
+	width:70px;
+	background:#BA0813;
+}
+
+.div5{
+	float:left;
+	margin-left:350px;
+	width:310px;
+	border:1px solid gray;
+}

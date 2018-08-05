@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ordering.mapper.ShoreMapper" >
+  <resultMap id="BaseResultMap" type="com.ordering.po.Shore" >
+    <id column="shoreId" property="shoreid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="shorename" property="shorename" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="shoretype_id" property="shoretypeId" jdbcType="INTEGER" />
+    <result column="shorePic" property="shorepic" jdbcType="VARCHAR" />
+    <result column="shoreMoblie" property="shoremoblie" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="CustomBaseResultMap" type="com.ordering.po.ShoreCustom" >
+    <id column="shoreId" property="shoreid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="shorename" property="shorename" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="shorePic" property="shorepic" jdbcType="VARCHAR" />
+    <result column="shoreMoblie" property="shoremoblie" jdbcType="VARCHAR" />
+     <result column="shoretype_id" property="shoretypeId" jdbcType="VARCHAR" />
+    
+    	<association property="shoretype" javaType="com.ordering.po.Shoretype">
+    		<id column="shoretype_id" property="shoretypeid"></id>
+    		<result column="shoreTypeName" property="shoretypename"/>
+    	</association>
+  </resultMap>
+  
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    shoreId, username, password, shorename, address, shoretype_id, shorePic, shoreMoblie
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ordering.po.ShoreExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shore
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from shore
+    where shoreId = #{shoreid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from shore
+    where shoreId = #{shoreid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ordering.po.ShoreExample" >
+    delete from shore
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ordering.po.Shore" >
+    insert into shore (shoreId, username, password, 
+      shorename, address, shoretype_id, 
+      shorePic, shoreMoblie)
+    values (#{shoreid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{shorename,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{shoretypeId,jdbcType=INTEGER}, 
+      #{shorepic,jdbcType=VARCHAR}, #{shoremoblie,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ordering.po.Shore" >
+    insert into shore
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shoreid != null" >
+        shoreId,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="shorename != null" >
+        shorename,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="shoretypeId != null" >
+        shoretype_id,
+      </if>
+      <if test="shorepic != null" >
+        shorePic,
+      </if>
+      <if test="shoremoblie != null" >
+        shoreMoblie,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shoreid != null" >
+        #{shoreid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="shorename != null" >
+        #{shorename,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="shoretypeId != null" >
+        #{shoretypeId,jdbcType=INTEGER},
+      </if>
+      <if test="shorepic != null" >
+        #{shorepic,jdbcType=VARCHAR},
+      </if>
+      <if test="shoremoblie != null" >
+        #{shoremoblie,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ordering.po.ShoreExample" resultType="java.lang.Integer" >
+    select count(*) from shore
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shore
+    <set >
+      <if test="record.shoreid != null" >
+        shoreId = #{record.shoreid,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shorename != null" >
+        shorename = #{record.shorename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shoretypeId != null" >
+        shoretype_id = #{record.shoretypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shorepic != null" >
+        shorePic = #{record.shorepic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shoremoblie != null" >
+        shoreMoblie = #{record.shoremoblie,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shore
+    set shoreId = #{record.shoreid,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      shorename = #{record.shorename,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      shoretype_id = #{record.shoretypeId,jdbcType=INTEGER},
+      shorePic = #{record.shorepic,jdbcType=VARCHAR},
+      shoreMoblie = #{record.shoremoblie,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ordering.po.Shore" >
+    update shore
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="shorename != null" >
+        shorename = #{shorename,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="shoretypeId != null" >
+        shoretype_id = #{shoretypeId,jdbcType=INTEGER},
+      </if>
+      <if test="shorepic != null" >
+        shorePic = #{shorepic,jdbcType=VARCHAR},
+      </if>
+      <if test="shoremoblie != null" >
+        shoreMoblie = #{shoremoblie,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where shoreId = #{shoreid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ordering.po.Shore" >
+    update shore
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      shorename = #{shorename,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      shoretype_id = #{shoretypeId,jdbcType=INTEGER},
+      shorePic = #{shorepic,jdbcType=VARCHAR},
+      shoreMoblie = #{shoremoblie,jdbcType=VARCHAR}
+    where shoreId = #{shoreid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 检查用户名是否存在 -->
+  <select id="check" parameterType="java.lang.String" resultType="com.ordering.po.Shore">
+  		select * from shore where username=#{username}
+  </select>
+    <!-- 根据用户名和密码查询： -->
+    <select id="selectShore" parameterType="com.ordering.po.Shore" resultMap="CustomBaseResultMap">
+  		select shore.*,shoretype.shoreTypeName from shore,shoretype where username=#{username} and password=#{password} and shore.shoretype_id=shoretype.shoreTypeId
+  </select>
+  
+  <!-- 根据id查询 -->
+   <select id="selectShoreById" parameterType="com.ordering.po.Shore" resultMap="CustomBaseResultMap">
+  		select shore.*,shoretype.shoreTypeName from shore,shoretype where shoreId = #{shoreid,jdbcType=INTEGER} and shore.shoretype_id=shoretype.shoreTypeId
+  </select>
+    <select id="selectShoreByPrimaryKey" parameterType="java.lang.Integer" resultMap="CustomBaseResultMap">
+  		select shore.*,shoretype.shoreTypeName from shore,shoretype where shoreId = #{shoreid,jdbcType=INTEGER} and shore.shoretype_id=shoretype.shoreTypeId
+  </select>
+  
+  
+  <!-- 查询所有的商家 -->
+  <select id="selectAllShore" resultType="com.ordering.po.Shore">
+  		select * from shore
+  </select>
+ 
+   <select id="findShoreByType" parameterType="java.lang.Integer" resultType="com.ordering.po.Shore">
+  		select * from shore where shoretype_id = #{id}
+  </select> 
+  
+  
+  <!-- 更新商家信息： -->
+  <update id="updateShore" parameterType="com.ordering.po.Shore">
+  		update shore
+	     set shorename = #{shorename,jdbcType=VARCHAR},
+	      address = #{address,jdbcType=VARCHAR},
+	      shoretype_id = #{shoretypeId,jdbcType=INTEGER},
+	      shoreMoblie = #{shoremoblie,jdbcType=VARCHAR}
+	    where shoreId = #{shoreid,jdbcType=INTEGER}
+  </update>
+  
+    <update id="updateShoreImg" parameterType="com.ordering.po.Shore">
+  		update shore
+	     set shorePic = #{shorepic,jdbcType=VARCHAR}
+	    where shoreId = #{shoreid,jdbcType=INTEGER}
+  </update>
+  
+  
+</mapper>

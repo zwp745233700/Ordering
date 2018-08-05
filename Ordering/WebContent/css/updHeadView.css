@@ -1,0 +1,42 @@
+.main{
+	margin:0 auto;
+	background:url(../images/login.jpg) no-repeat;
+	background-size:cover
+}
+.title{
+	margin-left:200px;
+	margin-top:40px;
+	color:gray;
+	font-size:40px;
+}
+.oldHead{
+	float:left;
+	margin-left:200px;
+	margin-top:50px;
+	width:250px;
+	height:250px;
+	border:1px solid gray;
+}
+.newHead{
+	float:left;
+	margin-left:80px;
+	margin-top:50px;
+	width:250px;
+	height:250px;
+	border:1px solid gray;
+}
+.ziti{
+	margin-left:5px;
+	color:gray;
+	font-size:20px;
+}
+.chooseImg{
+	float:left;
+	margin-left:390px;
+	margin-top:50px;
+	width:600px;
+}
+.submit1{
+	width:70px;
+	background:#BA0813;
+}

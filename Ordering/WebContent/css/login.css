@@ -1,0 +1,26 @@
+.main{
+	margin:0 auto;
+	background:url(../images/login.jpg) no-repeat;
+	background-size:cover
+}
+.title{
+	margin-left:230px;
+	margin-top:30px;
+	color:gray;
+	font-size:40px;
+}
+.login1{
+	margin-left:400px;
+	padding-left:8px;
+	border:1px solid gray;
+	width:310px;
+}
+.login2{
+	line-height:40px;
+	margin-left:20px;
+	padding-left:15px;
+}
+.submit1{
+	width:220px;
+	background:#BA0813;
+}

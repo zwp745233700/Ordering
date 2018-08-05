@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_9" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>Springmvc_mybatis</display-name>
+	
+	<!-- 加载spring容器 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:/spring/applicationContext-*.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- 配置前端控制器:第一种方式 -->
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+			
+		<!-- contextConfigLocation:配置springmvc加载的配置文件（处理处映射器、处理器适配器等等） -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:/spring/springmvc.xml</param-value>
+		</init-param>	 
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<!-- 
+		第一种：*.action,访问以.action结尾由DispatcherServlet进行解析
+		第二种：/,所有访问的地址都由DispatcherServlet进行解析，对于静态文件的解析需要配置
+				不让DispatcherServlet进行解析,使用此种方法可以实现RESTful风格的url
+		第三种：/*，这种配置不对，使用这种配置，最终要转发到一个jsp页面，仍然会由
+					DispatcherServlet解析jsp,不能根据jsp页面找到Handle,会报错-->
+		<url-pattern>*.action</url-pattern>
+	</servlet-mapping>
+	
+		<!-- 配置前端控制器：第二种方式：（两种方式可以同时存在） -->
+		<!-- RESTful规范要用第二种方式： -->
+	<servlet>
+		<servlet-name>springmvc_restful</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+			
+		<!-- contextConfigLocation:配置springmvc加载的配置文件（处理处映射器、处理器适配器等等） -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:/spring/springmvc.xml</param-value>
+		</init-param>	 
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>springmvc_restful</servlet-name>
+		<!-- 
+		第一种：*.action,访问以.action结尾由DispatcherServlet进行解析
+		第二种：/,所有访问的地址都由DispatcherServlet进行解析，对于静态文件的解析需要配置
+				不让DispatcherServlet进行解析,使用此种方法可以实现RESTful风格的url
+		第三种：/*，这种配置不对，使用这种配置，最终要转发到一个jsp页面，仍然会由
+					DispatcherServlet解析jsp,不能根据jsp页面找到Handle,会报错-->
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<!-- post乱码过滤器 -->
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

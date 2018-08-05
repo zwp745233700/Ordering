@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ordering.mapper.OrdersMapper" >
+  <resultMap id="BaseResultMap" type="com.ordering.po.Orders" >
+    <id column="orderId" property="orderid" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="discuss" property="discuss" jdbcType="VARCHAR" />
+    <result column="pay" property="pay" jdbcType="INTEGER" />
+    <result column="statu" property="statu" jdbcType="INTEGER" />
+    <result column="total" property="total" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="shore_id" property="shoreId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    orderId, createTime, number, discuss, pay, statu, total, phone, address, uname, user_id, 
+    shore_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ordering.po.OrdersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where orderId = #{orderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from orders
+    where orderId = #{orderid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ordering.po.OrdersExample" >
+    delete from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ordering.po.Orders" >
+    insert into orders (orderId, createTime, number, 
+      discuss, pay, statu, 
+      total, phone, address, 
+      uname, user_id, shore_id
+      )
+    values (#{orderid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{number,jdbcType=INTEGER}, 
+      #{discuss,jdbcType=VARCHAR}, #{pay,jdbcType=INTEGER}, #{statu,jdbcType=INTEGER}, 
+      #{total,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{uname,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{shoreId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ordering.po.Orders" >
+     <selectKey keyProperty="orderid" order="AFTER" resultType="java.lang.Integer"> 
+    	SELECT LAST_INSERT_ID()
+    </selectKey>
+  
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="discuss != null" >
+        discuss,
+      </if>
+      <if test="pay != null" >
+        pay,
+      </if>
+      <if test="statu != null" >
+        statu,
+      </if>
+      <if test="total != null" >
+        total,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="uname != null" >
+        uname,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="shoreId != null" >
+        shore_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="discuss != null" >
+        #{discuss,jdbcType=VARCHAR},
+      </if>
+      <if test="pay != null" >
+        #{pay,jdbcType=INTEGER},
+      </if>
+      <if test="statu != null" >
+        #{statu,jdbcType=INTEGER},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="shoreId != null" >
+        #{shoreId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ordering.po.OrdersExample" resultType="java.lang.Integer" >
+    select count(*) from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update orders
+    <set >
+      <if test="record.orderid != null" >
+        orderId = #{record.orderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.discuss != null" >
+        discuss = #{record.discuss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pay != null" >
+        pay = #{record.pay,jdbcType=INTEGER},
+      </if>
+      <if test="record.statu != null" >
+        statu = #{record.statu,jdbcType=INTEGER},
+      </if>
+      <if test="record.total != null" >
+        total = #{record.total,jdbcType=INTEGER},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uname != null" >
+        uname = #{record.uname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shoreId != null" >
+        shore_id = #{record.shoreId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update orders
+    set orderId = #{record.orderid,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      number = #{record.number,jdbcType=INTEGER},
+      discuss = #{record.discuss,jdbcType=VARCHAR},
+      pay = #{record.pay,jdbcType=INTEGER},
+      statu = #{record.statu,jdbcType=INTEGER},
+      total = #{record.total,jdbcType=INTEGER},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      uname = #{record.uname,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      shore_id = #{record.shoreId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ordering.po.Orders" >
+    update orders
+    <set >
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="discuss != null" >
+        discuss = #{discuss,jdbcType=VARCHAR},
+      </if>
+      <if test="pay != null" >
+        pay = #{pay,jdbcType=INTEGER},
+      </if>
+      <if test="statu != null" >
+        statu = #{statu,jdbcType=INTEGER},
+      </if>
+      <if test="total != null" >
+        total = #{total,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null" >
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="shoreId != null" >
+        shore_id = #{shoreId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where orderId = #{orderid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ordering.po.Orders" >
+    update orders
+    set createTime = #{createtime,jdbcType=TIMESTAMP},
+      number = #{number,jdbcType=INTEGER},
+      discuss = #{discuss,jdbcType=VARCHAR},
+      pay = #{pay,jdbcType=INTEGER},
+      statu = #{statu,jdbcType=INTEGER},
+      total = #{total,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      uname = #{uname,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      shore_id = #{shoreId,jdbcType=INTEGER}
+    where orderId = #{orderid,jdbcType=INTEGER}
+  </update>
+  
+  
+  <!-- 订单多表查询resultMap映射 -->
+    <resultMap id="queryVoResultMap" type="com.ordering.po.OrdersVo" >
+	    <id column="orderId" property="orderid" jdbcType="INTEGER" />
+	    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+	    <result column="number" property="number" jdbcType="INTEGER" />
+	    <result column="discuss" property="discuss" jdbcType="VARCHAR" />
+	    <result column="pay" property="pay" jdbcType="INTEGER" />
+	    <result column="statu" property="statu" jdbcType="INTEGER" />
+	    <result column="total" property="total" jdbcType="INTEGER" />
+	    <result column="phone" property="phone" jdbcType="VARCHAR" />
+	    <result column="address" property="address" jdbcType="VARCHAR" />
+	    <result column="uname" property="uname" jdbcType="VARCHAR" />
+	    <result column="user_id" property="userId" jdbcType="INTEGER" />
+	    <result column="shore_id" property="shoreId" jdbcType="INTEGER" />
+	    	
+    	 	<association property="shore" javaType="com.ordering.po.Shore">
+    			<id column="shore_id" property="shoreid"/>
+    			<result column="shorename" property="shorename" />
+	    	</association>
+	    	
+	    	<association property="user" javaType="com.ordering.po.User">
+    			<id column="user_id" property="userid" />
+    			<result column="userName" property="username" />
+	    	</association>
+	    	
+	    	<association property="orderdetail" javaType="com.ordering.po.Orderdetail">
+	    		<id column="detailId" property="detailid"/>
+	    		<result column="order_id" property="orderId" />
+	    		<result column="menu_id" property="menuId" />
+	    		
+	    		<association property="menu" javaType="com.ordering.po.Menu">
+	    			<id column="menuId" property="menuid"/>
+	    			<result column="menuName" property="menuname" />
+	    			<result column="menuPic" property="menupic" />
+	    			<result column="menuPrice" property="menuprice" />
+	    			<result column="meneDetail" property="menedetail" />
+	    			<result column="shore_id" property="shoreId" />
+	    			<result column="type_id" property="typeId" />
+	    		</association>
+	    	</association>
+	    	
+	    	<!-- <collection property="orderdetail" ofType="com.ordering.po.Orderdetail">
+	    		<id column="detailId" property="detailid"/>
+	    		<result column="order_id" property="orderId" />
+	    		<result column="menu_id" property="menuId" />
+	    		
+	    		<association property="menu" javaType="com.ordering.po.Menu">
+	    			<id column="menuId" property="menuid"/>
+	    			<result column="menuName" property="menuname" />
+	    			<result column="menuPic" property="menupic" />
+	    			<result column="menuPrice" property="menuprice" />
+	    			<result column="meneDetail" property="menedetail" />
+	    			<result column="shore_id" property="shoreId" />
+	    			<result column="type_id" property="typeId" />
+	    		</association>
+	    	</collection> -->
+  </resultMap>
+  
+  <!-- 根据订单id进行多表查询 -->
+  <select id="findOrderById" parameterType="java.lang.Integer" resultMap="queryVoResultMap">
+  	select orders.*,
+		orderdetail.*,
+		shore.shorename,
+		menu.*,
+		user.*
+	from orders,orderdetail,shore,menu,user
+		where orders.orderId=#{id}
+		and orders.orderId=orderdetail.order_id 
+		and orders.shore_id=shore.shoreId
+		and orderdetail.menu_id = menu.menuId
+		and orders.user_id = user.userId
+  </select>
+  
+    <!-- 根据商店id进行多表查询 -->
+  <select id="findOrderByShoreId" parameterType="java.lang.Integer" resultMap="queryVoResultMap">
+  	select orders.*,
+		orderdetail.*,
+		shore.shorename,
+		menu.*,
+		user.*
+	from orders,orderdetail,shore,menu,user
+		where shore.shoreId=#{id}
+		and orders.shore_id=shore.shoreId
+		and orders.orderId=orderdetail.order_id
+		and orderdetail.menu_id = menu.menuId
+		and orders.user_id = user.userId
+  </select>
+  
+   <select id="findOrdertailByOrderid" parameterType="java.lang.Integer" resultMap="queryVoResultMap">
+  	select orders.*,
+		orderdetail.*,
+		shore.shorename,
+		menu.*,
+		user.*
+	from orders,orderdetail,shore,menu,user
+		where orders.orderId=#{id}
+		and orders.orderId=orderdetail.order_id 
+		and orders.shore_id=shore.shoreId
+		and orderdetail.menu_id = menu.menuId
+		and orders.user_id = user.userId
+  </select>
+  
+  
+    <!-- 根据用户id进行多表查询 -->
+  <select id="findOrderByuserId" parameterType="java.lang.Integer" resultMap="queryVoResultMap">
+  	select orders.*,
+		orderdetail.*,
+		shore.shorename,
+		menu.*
+	from orders,orderdetail,shore,menu
+		where orders.user_id=#{id}
+		and orders.orderId=orderdetail.order_id 
+		and orders.shore_id=shore.shoreId
+		and orderdetail.menu_id = menu.menuId
+  </select>
+  
+  <select id="findMyOrderByStatu1" parameterType="java.lang.Integer" resultMap="queryVoResultMap">
+  	select orders.*,
+		orderdetail.*,
+		shore.shorename,
+		menu.*
+	from orders,orderdetail,shore,menu
+		where orders.user_id=#{id}
+		and orders.statu=1
+		and orders.orderId=orderdetail.order_id 
+		and orders.shore_id=shore.shoreId
+		and orderdetail.menu_id = menu.menuId
+  </select>
+  
+  <select id="findMyOrderByStatu2" parameterType="java.lang.Integer" resultMap="queryVoResultMap">
+  	select orders.*,
+		orderdetail.*,
+		shore.shorename,
+		menu.*
+	from orders,orderdetail,shore,menu
+		where orders.user_id=#{id}
+		and orders.statu=0
+		and orders.orderId=orderdetail.order_id 
+		and orders.shore_id=shore.shoreId
+		and orderdetail.menu_id = menu.menuId
+  </select>
+  
+</mapper>

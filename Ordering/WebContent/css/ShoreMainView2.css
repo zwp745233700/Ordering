@@ -1,0 +1,147 @@
+.head{
+	margin:0 auto;
+	margin-top:40px;
+	width:800px;
+	height:180px;
+	border:1px solid gray;
+}
+.pic{
+	float:left;
+	width:150px;
+	height:145px;
+	border:1px solid gray;
+	margin-top:8px;
+	margin-left:6px;
+}
+.message{
+	float:left;
+	margin-left:8px;
+	margin-top:10px;
+	width:630px;
+}
+.resumn{
+	float:left;
+	margin-left:8px;
+	width:630px;
+	height:72px;
+}
+.div1{
+	float:left;
+	margin-left:30px;
+	width:40px;
+	height:38px;
+}
+.edit{
+	float:right;
+	margin-top:10px;
+	margin-right:10px;
+}
+.article{
+	margin:0 auto;
+	margin-top:10px;
+	width:800px;
+	border:1px solid gray;
+	height:400px;
+	padding-top:10px;
+	padding-left:8px;
+}
+.main1{
+	margin:0 auto;
+	margin-top:20px;
+	width:800px;
+	padding-top:15px;
+	padding-bottom:15px;
+	border:1px solid gray;
+}
+.main2{
+	margin:0 auto;
+	margin-top:20px;
+	width:800px;
+	height:350px;
+	padding-top:15px;
+	padding-bottom:15px;
+	border:1px solid gray;
+}
+.main3{
+	margin:0 auto;
+	margin-top:20px;
+	width:800px;
+	padding-top:15px;
+	padding-bottom:15px;
+}
+.main6{
+	margin:0 auto;
+	margin-top:20px;
+	width:800px;
+	padding-top:15px;
+	padding-bottom:15px;
+	border:1px solid gray;
+}
+.left{
+	float:left;
+	width:400px;
+	margin-left:10px;
+	border:1px solid gray;
+	padding-top:10px;
+}
+.right{
+	float:left;
+	width:280px;
+	margin-left:30px;
+	height:250px;
+	border:1px solid gray;
+}
+.edit2{
+	float:left;
+	display:none;
+}
+.left1{
+	float:left;
+	width:100px;
+	height:600px;
+	margin-left:10px;
+	padding-top:10px;
+}
+.menu{
+	float:left;
+	width:160px;
+	height:180px;
+	margin-left:10px;
+	margin-top:10px;
+	border:1px solid gray;
+}
+.img{
+	float:left;
+	width:159px;
+	height:150px;
+	border:1px solid gray;
+}
+.right3{
+	float:left;
+	width:360px;
+	margin-left:10px;
+	height:290px;
+	border:1px solid gray;
+}
+.right5{
+	float:left;
+	width:365px;
+	margin-left:10px;
+	height:200px;
+	border:1px solid gray;
+}
+.right4{
+	float:left;
+	width:170px;
+	margin-left:10px;
+	height:300px;
+}
+.menu2{
+	float:left;
+	width:160px;
+	height:200px;
+	margin-left:10px;
+	margin-top:10px;
+	border:1px solid gray;
+}
+

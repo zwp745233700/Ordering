@@ -1,0 +1,42 @@
+.main{
+	margin:0 auto;
+	width:1200px;
+	height:65px;
+	border:1px solid gray;
+}
+.font4{
+	font-size:20px;
+	color:gray;
+}
+.login{
+	float:right;
+}
+a{
+	text-decoration:none;
+}
+.list{
+	margin:0 auto;
+	margin-top:15px;
+	width:1200px;
+	border:1px solid gray;
+}
+.shop{
+	margin:0 auto;
+	margin-top:15px;
+	width:1200px;
+	border:1px solid gray;
+}
+.shopdiv{
+	float:left;
+	width:159px;
+	height:176px;
+	margin-left:10px;
+	margin-top:10px;
+	border:1px solid gray;
+}
+.img{
+	float:left;
+	width:158px;
+	height:150px;
+	border:1px solid gray;
+}

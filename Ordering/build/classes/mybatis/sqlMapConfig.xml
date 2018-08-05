@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- setting全局变量配置 -->
+	
+	<!-- 配置别名 -->
+	<typeAliases>
+		<!-- 批量配置别名 -->
+		<package name="com.ordering.po"/>
+	</typeAliases>
+
+	<!-- 加载映射文件 -->
+	<mappers>		
+		<!-- 和spring整合后，使用mapper扫描器，这里不需要配置 -->
+		<!-- <package name="com.ordering.mapper"/> -->
+	</mappers>
+</configuration>

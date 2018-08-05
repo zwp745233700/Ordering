@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"        
+    xmlns:mvc="http://www.springframework.org/schema/mvc"     
+    xmlns:tx="http://www.springframework.org/schema/tx"  
+    xmlns:aop="http://www.springframework.org/schema/aop"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"              
+    xsi:schemaLocation="                                               
+            http://www.springframework.org/schema/beans    
+            http://www.springframework.org/schema/beans/spring-beans.xsd    
+            http://www.springframework.org/schema/context     
+            http://www.springframework.org/schema/context/spring-context.xsd    
+            http://www.springframework.org/schema/mvc    
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd  
+            http://www.springframework.org/schema/tx   
+            http://www.springframework.org/schema/tx/spring-tx.xsd  
+            http://www.springframework.org/schema/aop  
+            http://www.springframework.org/schema/aop/spring-aop.xsd">  
+
+	<!-- 5.配置事务管理器 -->
+	<!-- 创建DataSourceTransactionManager,并注入dataSource -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!-- DataSource在applicationContext-dao.xml中配置了 -->
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- 6.配置事务增强 -->
+	<tx:advice id="txadvice" transaction-manager="transactionManager">
+		<!-- 7.做事务操作 -->
+		<tx:attributes>
+			<!-- 8.设置进行事务操作的方法匹配规则 -->
+			<tx:method name="save*" propagation="REQUIRED"/>
+			<tx:method name="delete*" propagation="REQUIRED"/>
+			<tx:method name="insert*" propagation="REQUIRED"/>
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+			<tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+			<tx:method name="select*" propagation="SUPPORTS" read-only="true"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 9.配置切面 -->
+	<aop:config>
+		<!--10.配置切入点 -->
+		<aop:pointcut expression="execution(* com.ordering.serviceImpl.*.*(..))" id="pointcut1"/>
+		<!--11.配置切面  -->
+		<aop:advisor advice-ref="txadvice" pointcut-ref="pointcut1"/>
+	</aop:config>
+	
+</beans>
